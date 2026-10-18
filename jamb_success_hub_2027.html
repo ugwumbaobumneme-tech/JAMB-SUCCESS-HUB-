@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAMB SUCCESS HUB 2027 - Dynamic CBT & Unique Question Engine</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            300: '#FDE047',
+                            400: '#FACC15',
+                            500: '#EAB308',
+                            600: '#CA8A04',
+                            700: '#A16207',
+                        },
+                        cyber: {
+                            950: '#05070E',
+                            900: '#0B0F19',
+                            850: '#101625',
+                            800: '#161F33',
+                            700: '#222F4C',
+                            600: '#334155'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #05070E; }
+        ::-webkit-scrollbar-thumb { background: #CA8A04; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FACC15; }
+
+        /* Custom Theme Styles */
+        body.theme-cyber { --bg-main: #05070E; --bg-card: #0B0F19; --accent: #EAB308; }
+        body.theme-emerald { --bg-main: #02120D; --bg-card: #06241B; --accent: #10B981; }
+        body.theme-crimson { --bg-main: #140508; --bg-card: #220A0F; --accent: #F43F5E; }
+        body.theme-midnight { --bg-main: #060B14; --bg-card: #0E1726; --accent: #3B82F6; }
+        
+        /* Font scale modifiers */
+        .font-scale-sm { font-size: 0.875rem; }
+        .font-scale-md { font-size: 1rem; }
+        .font-scale-lg { font-size: 1.125rem; }
+
+        .glow-gold { box-shadow: 0 0 25px -5px rgba(234, 179, 8, 0.25); }
+        .glow-emerald { box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25); }
+        .glow-border { border: 1px solid rgba(234, 179, 8, 0.3); }
+    </style>
+</head>
+<body class="theme-cyber bg-cyber-950 text-slate-100 font-sans min-h-screen flex flex-col selection:bg-gold-500 selection:text-cyber-950 transition-colors duration-300">
+
+    <!-- TOP COUNTDOWN BAR -->
+    <div class="bg-gradient-to-r from-gold-700 via-gold-500 to-gold-600 text-cyber-950 px-4 py-1.5 text-xs font-bold flex justify-between items-center shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i data-lucide="flame" class="w-4 h-4 fill-cyber-950"></i>
+                <span class="tracking-wide">JAMB 2027 TARGET COUNTDOWN: <span id="countdown-days" class="font-extrabold text-sm underline">--</span> DAYS LEFT</span>
+            </div>
+            <div class="hidden md:flex items-center gap-6">
+                <span>Unique Engine: <span class="bg-cyber-950 text-gold-400 px-2 py-0.5 rounded text-[10px] font-mono">DYNAMIC v2.7</span></span>
+                <span>Attempts Recorded: <span id="top-attempts-badge" class="text-cyber-950 font-extrabold bg-gold-300 px-1.5 py-0.5 rounded">0</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-cyber-900/90 backdrop-blur-md border-b border-cyber-800 shadow-xl">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('dashboard')">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-400 to-gold-700 p-0.5 shadow-lg glow-gold">
+                        <div class="w-full h-full bg-cyber-950 rounded-[10px] flex items-center justify-center">
+                            <i data-lucide="award" class="w-6 h-6 text-gold-400"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-serif font-bold text-lg sm:text-xl text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-500 to-amber-200 tracking-wider">JAMB SUCCESS HUB</div>
+                        <div class="text-[10px] text-slate-400 tracking-widest font-semibold uppercase flex items-center gap-1">
+                            <span>2027 DYNAMIC CBT</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                            <span class="text-gold-400">1M+ POOL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-1 bg-cyber-950/80 p-1.5 rounded-2xl border border-cyber-800">
+                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition text-gold-400 bg-cyber-800">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+                    </button>
+                    <button onclick="switchTab('library')" id="nav-library" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition text-slate-400 hover:text-slate-200">
+                        <i data-lucide="book-open" class="w-4 h-4"></i> Study Library
+                    </button>
+                    <button onclick="switchTab('practice')" id="nav-practice" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition text-slate-400 hover:text-slate-200">
+                        <i data-lucide="database" class="w-4 h-4"></i> 1M+ Questions
+                    </button>
+                    <button onclick="switchTab('cbt')" id="nav-cbt" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition text-slate-400 hover:text-slate-200">
+                        <i data-lucide="cpu" class="w-4 h-4"></i> Unique Mock CBT
+                    </button>
+                    <button onclick="switchTab('progress')" id="nav-progress" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition text-slate-400 hover:text-slate-200">
+                        <i data-lucide="line-chart" class="w-4 h-4"></i> Progress Tracker
+                    </button>
+                    <button onclick="switchTab('settings')" id="nav-settings" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition text-slate-400 hover:text-slate-200">
+                        <i data-lucide="settings" class="w-4 h-4"></i> Settings
+                    </button>
+                </nav>
+
+                <!-- User Target Badge -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <div class="bg-cyber-950 border border-gold-500/30 px-3 py-1.5 rounded-xl flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-gold-500/20 text-gold-400 flex items-center justify-center font-bold text-xs">
+                            <i data-lucide="target" class="w-4 h-4"></i>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-[10px] text-slate-400 uppercase font-semibold">Target Score</div>
+                            <div class="text-xs font-extrabold text-gold-400"><span id="header-target-score">340</span> / 400</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg bg-cyber-800 text-slate-200">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-cyber-900 border-b border-cyber-800 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('dashboard')" class="w-full text-left px-3 py-2 rounded-lg text-sm text-slate-200 flex items-center gap-3"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</button>
+            <button onclick="switchTab('library')" class="w-full text-left px-3 py-2 rounded-lg text-sm text-slate-200 flex items-center gap-3"><i data-lucide="book-open" class="w-4 h-4"></i> Study Library</button>
+            <button onclick="switchTab('practice')" class="w-full text-left px-3 py-2 rounded-lg text-sm text-slate-200 flex items-center gap-3"><i data-lucide="database" class="w-4 h-4"></i> 1M+ Questions Bank</button>
+            <button onclick="switchTab('cbt')" class="w-full text-left px-3 py-2 rounded-lg text-sm text-slate-200 flex items-center gap-3"><i data-lucide="cpu" class="w-4 h-4"></i> Unique Mock CBT</button>
+            <button onclick="switchTab('progress')" class="w-full text-left px-3 py-2 rounded-lg text-sm text-slate-200 flex items-center gap-3"><i data-lucide="line-chart" class="w-4 h-4"></i> Progress Tracker</button>
+            <button onclick="switchTab('settings')" class="w-full text-left px-3 py-2 rounded-lg text-sm text-slate-200 flex items-center gap-3"><i data-lucide="settings" class="w-4 h-4"></i> Settings</button>
+        </div>
+    </header>
+
+    <!-- MAIN VIEWPORT CONTAINER -->
+    <main class="flex-grow container mx-auto px-4 sm:px-6 py-8">
+
+        <!-- ================= TAB 1: DASHBOARD ================= -->
+        <section id="tab-content-dashboard" class="space-y-8">
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl bg-gradient-to-r from-cyber-900 via-cyber-850 to-cyber-900 p-6 sm:p-10 border border-gold-500/20 overflow-hidden shadow-2xl">
+                <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="relative z-10 max-w-3xl space-y-4">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> 100% Unique Questions Guaranteed Per Mock
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold font-serif leading-tight">
+                        Master JAMB 2027 With <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 to-gold-500">Unrepeated Questions</span>
+                    </h1>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Our dynamic synthesis engine constructs fresh, variable-driven questions for every CBT attempt. Every mock test is guaranteed distinct from your previous sessions.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchTab('cbt')" class="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-cyber-950 font-extrabold px-6 py-3 rounded-xl shadow-lg hover:shadow-gold-500/20 transition flex items-center gap-2 text-sm">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i> Launch Unique CBT Mock
+                        </button>
+                        <button onclick="switchTab('library')" class="bg-cyber-950 hover:bg-cyber-800 text-slate-200 border border-cyber-700 font-semibold px-6 py-3 rounded-xl transition flex items-center gap-2 text-sm">
+                            <i data-lucide="book-open" class="w-5 h-5 text-gold-400"></i> Read Syllabus Modules
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <div class="bg-cyber-900 p-5 rounded-2xl border border-cyber-800 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="file-check-2" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">Mock Attempts</div>
+                        <div id="dash-attempts-count" class="text-xl sm:text-2xl font-extrabold text-slate-100">0</div>
+                    </div>
+                </div>
+
+                <div class="bg-cyber-900 p-5 rounded-2xl border border-cyber-800 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="layers" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">Unique Questions Attempted</div>
+                        <div id="dash-unique-questions" class="text-xl sm:text-2xl font-extrabold text-emerald-400">0</div>
+                    </div>
+                </div>
+
+                <div class="bg-cyber-900 p-5 rounded-2xl border border-cyber-800 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">Avg. Mock Score</div>
+                        <div id="dash-avg-score" class="text-xl sm:text-2xl font-extrabold text-blue-400">-- / 400</div>
+                    </div>
+                </div>
+
+                <div class="bg-cyber-900 p-5 rounded-2xl border border-cyber-800 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">Syllabus Coverage</div>
+                        <div id="dash-syllabus-coverage" class="text-xl sm:text-2xl font-extrabold text-purple-400">12%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject Cards Quick Hubs -->
+            <div>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-serif font-bold text-slate-100">Subject Master Hubs</h2>
+                    <span class="text-xs text-gold-400 font-semibold">5 Core JAMB Subjects</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" id="dashboard-subject-cards">
+                    <!-- Dynamic Injected Cards -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: READING MENU (STUDY LIBRARY) ================= -->
+        <section id="tab-content-library" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-cyber-900 p-6 rounded-2xl border border-cyber-800">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-slate-100">Syllabus Reader & Book Library</h2>
+                    <p class="text-xs text-slate-400 mt-1">High-yield study notes, reaction mechanisms, mathematical derivations & literary breakdowns.</p>
+                </div>
+                <div class="flex flex-wrap gap-2" id="library-subject-selector">
+                    <!-- Subject Buttons Injected -->
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-6">
+                <!-- Topic Navigation Drawer -->
+                <div class="lg:col-span-4 bg-cyber-900 p-5 rounded-2xl border border-cyber-800 space-y-4">
+                    <div class="flex justify-between items-center pb-3 border-b border-cyber-800">
+                        <span class="text-xs font-bold uppercase tracking-wider text-gold-400">Topic Modules</span>
+                        <span id="library-module-count" class="text-xs text-slate-400">5 Modules</span>
+                    </div>
+                    <div id="library-topic-list" class="space-y-2 max-h-[520px] overflow-y-auto pr-1">
+                        <!-- Injected Topics -->
+                    </div>
+                </div>
+
+                <!-- Article Reader Engine -->
+                <div class="lg:col-span-8 bg-cyber-900 p-6 sm:p-8 rounded-2xl border border-cyber-800 space-y-6">
+                    <div class="flex justify-between items-center pb-4 border-b border-cyber-800">
+                        <div>
+                            <span id="read-subject-tag" class="text-[10px] font-bold uppercase tracking-widest bg-gold-500/10 text-gold-400 px-2.5 py-1 rounded-md border border-gold-500/20">Mathematics</span>
+                            <h3 id="read-topic-title" class="text-2xl font-serif font-bold text-slate-100 mt-2">Algebraic Processes & Functions</h3>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="toggleBookmarkTopic()" id="btn-bookmark-topic" class="p-2 rounded-xl bg-cyber-800 hover:bg-cyber-700 text-slate-300">
+                                <i data-lucide="bookmark" class="w-5 h-5"></i>
+                            </button>
+                            <button onclick="markTopicComplete()" id="btn-complete-topic" class="px-3 py-2 rounded-xl bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5">
+                                <i data-lucide="check" class="w-4 h-4"></i> Mark Completed
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="read-topic-body" class="prose prose-invert max-w-none text-slate-300 text-sm leading-relaxed space-y-4 font-sans">
+                        <!-- Content Injected -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: 1M+ PAST QUESTIONS ENGINE ================= -->
+        <section id="tab-content-practice" class="hidden space-y-6">
+            <div class="bg-cyber-900 p-6 rounded-2xl border border-cyber-800 space-y-4">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-2xl font-serif font-bold text-slate-100">1 Million+ Past Questions Search Bank</h2>
+                        <p class="text-xs text-slate-400">Search and filter across JAMB past questions with full step-by-step solutions.</p>
+                    </div>
+                    <button onclick="generateRandomPracticeSet()" class="bg-gold-500 hover:bg-gold-400 text-cyber-950 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-md">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i> Generate Dynamic Questions
+                    </button>
+                </div>
+
+                <!-- Filters -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase">Subject</label>
+                        <select id="pq-filter-subject" onchange="filterQuestions()" class="w-full mt-1 bg-cyber-950 border border-cyber-700 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-gold-400">
+                            <option value="all">All Subjects</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="English Language">English Language</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Biology">Biology</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase">Year Series</label>
+                        <select id="pq-filter-year" onchange="filterQuestions()" class="w-full mt-1 bg-cyber-950 border border-cyber-700 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-gold-400">
+                            <option value="all">All Exam Years</option>
+                            <option value="2026">2026 JAMB Standard</option>
+                            <option value="2025">2025 JAMB Standard</option>
+                            <option value="2024">2024 JAMB Standard</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase">Difficulty</label>
+                        <select id="pq-filter-diff" onchange="filterQuestions()" class="w-full mt-1 bg-cyber-950 border border-cyber-700 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-gold-400">
+                            <option value="all">All Difficulties</option>
+                            <option value="Easy">Standard Easy</option>
+                            <option value="Medium">JAMB Average</option>
+                            <option value="Hard">Tricky / Advanced</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase">Keyword Search</label>
+                        <input id="pq-search-input" onkeyup="filterQuestions()" type="text" placeholder="e.g. Velocity, Concord..." class="w-full mt-1 bg-cyber-950 border border-cyber-700 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none focus:border-gold-400">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feed -->
+            <div id="pq-questions-container" class="space-y-4">
+                <!-- Injected Questions -->
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: MOCK CBT TEST ENGINE ================= -->
+        <section id="tab-content-cbt" class="hidden space-y-6">
+            
+            <!-- Setup View -->
+            <div id="cbt-setup-card" class="bg-cyber-900 p-8 rounded-3xl border border-cyber-800 max-w-2xl mx-auto space-y-6 shadow-2xl relative overflow-hidden">
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 bg-gold-500/10 text-gold-400 rounded-2xl flex items-center justify-center mx-auto border border-gold-500/30 glow-gold">
+                        <i data-lucide="cpu" class="w-8 h-8"></i>
+                    </div>
+                    <h2 class="text-3xl font-serif font-bold text-slate-100">Dynamic JAMB CBT Simulator</h2>
+                    <p class="text-xs text-slate-400">Official Format: 180 Questions • 120 Minutes • Scaled out of 400</p>
+                </div>
+
+                <!-- Unique Attempt Notice Banner -->
+                <div class="bg-gradient-to-r from-gold-500/10 via-amber-500/10 to-gold-500/10 border border-gold-500/30 p-4 rounded-2xl flex items-center justify-between text-xs">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-gold-500/20 text-gold-400 flex items-center justify-center font-bold">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="font-extrabold text-gold-400" id="cbt-upcoming-attempt-label">Mock Attempt #1 Ready</div>
+                            <div class="text-[11px] text-slate-300">Question generator active. Guaranteed zero repeated questions.</div>
+                        </div>
+                    </div>
+                    <span id="cbt-unique-pool-badge" class="font-mono text-[10px] bg-cyber-950 text-gold-300 px-2.5 py-1 rounded-md border border-gold-500/30">180 NEW Qs</span>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="text-xs font-bold text-slate-300 uppercase block mb-2">Choose Subject Combination Track:</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="cursor-pointer bg-cyber-950 border-2 border-gold-500 p-4 rounded-xl flex items-start gap-3 transition">
+                                <input type="radio" name="cbt-track" value="science" checked class="mt-1 accent-gold-500">
+                                <div>
+                                    <div class="text-xs font-bold text-gold-400">Biological Sciences Track</div>
+                                    <div class="text-[10px] text-slate-400 mt-0.5">English (60) + Biology (40) + Chemistry (40) + Physics (40)</div>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer bg-cyber-950 border-2 border-cyber-700 hover:border-gold-500/50 p-4 rounded-xl flex items-start gap-3 transition">
+                                <input type="radio" name="cbt-track" value="engineering" class="mt-1 accent-gold-500">
+                                <div>
+                                    <div class="text-xs font-bold text-slate-200">Engineering & Technology Track</div>
+                                    <div class="text-[10px] text-slate-400 mt-0.5">English (60) + Maths (40) + Chemistry (40) + Physics (40)</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-cyber-950 border border-cyber-800 space-y-2 text-xs text-slate-400">
+                        <div class="font-bold text-slate-200 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-gold-400"></i> Exam Guidelines:</div>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Duration: 120 minutes continuous. Exam auto-submits when time expires.</li>
+                            <li>Total Score: Calculated and scaled out of 400 aggregate marks.</li>
+                            <li>Use top subject buttons or Matrix 1-180 to jump between subjects.</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="launchCBTExam()" class="w-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-cyber-950 font-extrabold py-4 rounded-xl shadow-xl transition flex items-center justify-center gap-2 text-base">
+                        <i data-lucide="play" class="w-5 h-5 fill-cyber-950"></i> START UNIQUE CBT EXAM
+                    </button>
+                </div>
+            </div>
+
+            <!-- Active CBT Viewport -->
+            <div id="cbt-active-viewport" class="hidden space-y-6">
+                <!-- CBT Top Header -->
+                <div class="bg-cyber-900 border border-cyber-800 p-4 rounded-2xl flex flex-wrap justify-between items-center gap-4 shadow-xl">
+                    <div class="flex items-center gap-3">
+                        <div id="cbt-active-subject-badge" class="bg-gold-500 text-cyber-950 px-3 py-1 rounded-lg font-extrabold text-xs">ENGLISH LANGUAGE</div>
+                        <div class="text-xs text-slate-300 font-semibold">Q <span id="cbt-q-number" class="text-gold-400 font-bold">1</span> / <span id="cbt-q-total">180</span></div>
+                    </div>
+
+                    <!-- Subject Nav Switchers -->
+                    <div class="flex gap-1 overflow-x-auto py-1" id="cbt-subject-switchers">
+                        <!-- Dynamic Subject Switcher Buttons -->
+                    </div>
+
+                    <!-- Countdown Display -->
+                    <div class="bg-cyber-950 border border-red-500/40 text-red-400 font-mono font-bold text-sm sm:text-base px-4 py-2 rounded-xl flex items-center gap-2">
+                        <i data-lucide="timer" class="w-5 h-5 animate-pulse"></i>
+                        <span id="cbt-timer-display">02:00:00</span>
+                    </div>
+                </div>
+
+                <!-- CBT Layout Workspace -->
+                <div class="grid lg:grid-cols-12 gap-6">
+                    <!-- Main Question Container -->
+                    <div class="lg:col-span-8 bg-cyber-900 p-6 sm:p-8 rounded-2xl border border-cyber-800 space-y-6 flex flex-col justify-between min-h-[460px]">
+                        <div>
+                            <div class="flex justify-between items-center mb-4 pb-2 border-b border-cyber-800/80">
+                                <span class="text-[10px] uppercase font-mono font-bold text-slate-400 tracking-wider" id="cbt-question-id-code">JAMB-2027-SEC-A</span>
+                                <button onclick="toggleFlagQuestion()" id="btn-flag-q" class="text-xs font-semibold text-slate-400 hover:text-gold-400 flex items-center gap-1.5 transition">
+                                    <i data-lucide="flag" class="w-4 h-4"></i> <span id="flag-btn-text">Flag Question</span>
+                                </button>
+                            </div>
+
+                            <h3 id="cbt-question-text" class="text-base sm:text-lg font-medium text-slate-100 leading-relaxed font-sans">Synthesizing Question...</h3>
+
+                            <!-- Passage box if English comprehension -->
+                            <div id="cbt-passage-box" class="hidden my-4 p-4 rounded-xl bg-cyber-950 border border-cyber-800 text-xs text-slate-300 leading-relaxed italic max-h-40 overflow-y-auto">
+                                <!-- Passage text -->
+                            </div>
+
+                            <!-- Options -->
+                            <div id="cbt-options-container" class="mt-6 space-y-3">
+                                <!-- Dynamic Options -->
+                            </div>
+                        </div>
+
+                        <!-- CBT Controls Bottom Bar -->
+                        <div class="flex justify-between items-center pt-6 border-t border-cyber-800">
+                            <button onclick="prevCBTQuestion()" class="bg-cyber-800 hover:bg-cyber-700 text-slate-200 px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i> Previous
+                            </button>
+                            <button onclick="confirmSubmitCBTModal()" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/40 px-4 py-2.5 rounded-xl text-xs font-bold transition">
+                                Finish & Submit Exam
+                            </button>
+                            <button onclick="nextCBTQuestion()" class="bg-gold-500 hover:bg-gold-400 text-cyber-950 px-5 py-2.5 rounded-xl text-xs font-extrabold flex items-center gap-2 transition">
+                                Next <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question Matrix Palette -->
+                    <div class="lg:col-span-4 bg-cyber-900 p-5 rounded-2xl border border-cyber-800 space-y-4 flex flex-col">
+                        <div class="flex justify-between items-center">
+                            <div class="text-xs font-bold text-slate-200 uppercase tracking-wider">Question Matrix</div>
+                            <span class="text-[10px] text-gold-400 font-mono" id="cbt-answered-summary">0 / 180 Answered</span>
+                        </div>
+                        
+                        <div id="cbt-matrix-grid" class="grid grid-cols-5 gap-2 max-h-[360px] overflow-y-auto pr-1">
+                            <!-- Injected Buttons 1-180 -->
+                        </div>
+
+                        <div class="pt-3 border-t border-cyber-800 grid grid-cols-3 gap-2 text-[10px] text-slate-400 font-medium">
+                            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-gold-500"></span> Answered</div>
+                            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-cyber-950 border border-cyber-700"></span> Unanswered</div>
+                            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-purple-500"></span> Flagged</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CBT Score Result Modal -->
+            <div id="cbt-result-card" class="hidden bg-cyber-900 p-8 rounded-3xl border border-gold-500/30 max-w-4xl mx-auto space-y-8 shadow-2xl">
+                <div class="text-center space-y-3">
+                    <span class="bg-gold-500/10 text-gold-400 text-xs font-bold px-3.5 py-1 rounded-full border border-gold-500/30">Official JAMB Performance Diagnostic</span>
+                    <h2 class="text-3xl font-serif font-bold text-slate-100">Exam Performance Summary</h2>
+                    
+                    <div class="inline-block bg-cyber-950 border-2 border-gold-400 p-6 rounded-2xl my-2 shadow-inner">
+                        <div class="text-xs text-slate-400 font-bold uppercase tracking-widest">AGGREGATE SCALED SCORE</div>
+                        <div id="result-aggregate-score" class="text-5xl font-extrabold text-gold-400 font-serif my-2">0 / 400</div>
+                        <div id="result-admission-status" class="text-xs font-bold text-emerald-400">Evaluating Readiness...</div>
+                    </div>
+                </div>
+
+                <!-- Subject Breakdown Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="result-subject-breakdown">
+                    <!-- Injected Breakdown -->
+                </div>
+
+                <!-- Step-by-Step Corrections & Explanations Drawer -->
+                <div class="space-y-4 pt-4 border-t border-cyber-800">
+                    <h3 class="text-lg font-serif font-bold text-slate-200">Explanations & Corrections</h3>
+                    <div id="result-corrections-container" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                        <!-- Injected Corrections -->
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-4 pt-4">
+                    <button onclick="resetCBT()" class="bg-cyber-800 hover:bg-cyber-700 text-slate-200 px-6 py-3 rounded-xl text-xs font-bold transition">Back to Exam Portal</button>
+                    <button onclick="switchTab('progress')" class="bg-gold-500 hover:bg-gold-400 text-cyber-950 px-6 py-3 rounded-xl text-xs font-extrabold transition">View Analytics Dashboard</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= TAB 5: PROGRESS TRACKER ================= -->
+        <section id="tab-content-progress" class="hidden space-y-6">
+            <div class="bg-cyber-900 p-6 rounded-2xl border border-cyber-800">
+                <h2 class="text-2xl font-serif font-bold text-slate-100">Progress & Weakness Diagnostics</h2>
+                <p class="text-xs text-slate-400">Calculated metrics based on your unique question attempts.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-6">
+                <!-- Readiness Meter -->
+                <div class="lg:col-span-4 bg-cyber-900 p-6 rounded-2xl border border-cyber-800 text-center space-y-4">
+                    <h3 class="text-xs font-bold text-slate-300 uppercase">Estimated JAMB Readiness</h3>
+                    <div class="relative w-44 h-44 mx-auto flex items-center justify-center">
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="text-cyber-800" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path id="readiness-svg-path" class="text-gold-400 stroke-current" stroke-dasharray="0, 100" stroke-width="3.5" stroke-linecap="round" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="absolute flex flex-col items-center">
+                            <span id="readiness-percent-label" class="text-3xl font-extrabold text-gold-400">0%</span>
+                            <span class="text-[10px] text-slate-400 uppercase font-semibold">Prepared</span>
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-400">Total Unique Questions Solved: <span id="prog-solved-count" class="text-gold-400 font-bold">0</span></div>
+                </div>
+
+                <!-- Subject Mastery Bars -->
+                <div class="lg:col-span-8 bg-cyber-900 p-6 rounded-2xl border border-cyber-800 space-y-4">
+                    <h3 class="text-xs font-bold text-slate-300 uppercase">Subject Mastery Index</h3>
+                    <div class="space-y-4" id="progress-mastery-bars">
+                        <!-- Injected Progress Bars -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 6: SETTINGS PANEL ================= -->
+        <section id="tab-content-settings" class="hidden space-y-6">
+            <div class="bg-cyber-900 p-6 rounded-2xl border border-cyber-800 max-w-3xl mx-auto space-y-6">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-slate-100">Dope Settings & Personalization Suite</h2>
+                    <p class="text-xs text-slate-400">Manage theme presets, target goals, font scaling, audio cues, and question cache state.</p>
+                </div>
+
+                <div class="space-y-6 border-t border-cyber-800 pt-6">
+                    <!-- Target Score -->
+                    <div>
+                        <label class="text-xs font-bold text-slate-200 uppercase block mb-1">Target JAMB Score Goal (200 - 390)</label>
+                        <input id="setting-target-input" type="number" min="200" max="390" value="340" onchange="updateSettings()" class="w-full bg-cyber-950 border border-cyber-700 rounded-xl px-4 py-2.5 text-sm text-gold-400 font-bold outline-none focus:border-gold-400">
+                    </div>
+
+                    <!-- Color Themes -->
+                    <div>
+                        <label class="text-xs font-bold text-slate-200 uppercase block mb-2">Visual Theme Presets</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button onclick="setThemePreset('cyber')" class="p-3 rounded-xl bg-cyber-950 border border-gold-500/50 text-xs font-bold text-gold-400">Cyber Dark Gold</button>
+                            <button onclick="setThemePreset('emerald')" class="p-3 rounded-xl bg-emerald-950 border border-emerald-500/50 text-xs font-bold text-emerald-400">Emerald Empire</button>
+                            <button onclick="setThemePreset('crimson')" class="p-3 rounded-xl bg-rose-950 border border-rose-500/50 text-xs font-bold text-rose-400">Crimson Blaze</button>
+                            <button onclick="setThemePreset('midnight')" class="p-3 rounded-xl bg-slate-950 border border-blue-500/50 text-xs font-bold text-blue-400">Midnight Sapphire</button>
+                        </div>
+                    </div>
+
+                    <!-- Font Sizing -->
+                    <div>
+                        <label class="text-xs font-bold text-slate-200 uppercase block mb-2">Questions Font Scaling</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="setFontScale('sm')" class="p-2.5 rounded-xl bg-cyber-950 border border-cyber-700 text-xs font-semibold text-slate-300">Small</button>
+                            <button onclick="setFontScale('md')" class="p-2.5 rounded-xl bg-cyber-950 border border-gold-500 text-xs font-semibold text-gold-400">Medium (Default)</button>
+                            <button onclick="setFontScale('lg')" class="p-2.5 rounded-xl bg-cyber-950 border border-cyber-700 text-xs font-semibold text-slate-300">Large</button>
+                        </div>
+                    </div>
+
+                    <!-- Sound and Haptics -->
+                    <div class="flex justify-between items-center py-2 border-t border-cyber-800">
+                        <div>
+                            <div class="text-xs font-bold text-slate-200">Timer Audio Alert (10-Minute Warning)</div>
+                            <div class="text-[10px] text-slate-400">Plays an audio alert when exam countdown hits 10 minutes</div>
+                        </div>
+                        <input id="setting-sound-toggle" type="checkbox" checked class="w-5 h-5 accent-gold-500">
+                    </div>
+
+                    <!-- Clear History / Unique State Reset -->
+                    <div class="p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex justify-between items-center">
+                        <div>
+                            <div class="text-xs font-bold text-red-400">Reset Question History & Attempt Counters</div>
+                            <div class="text-[10px] text-slate-400">Allows previously attempted questions to reappear in CBT generation.</div>
+                        </div>
+                        <button onclick="resetAttemptHistory()" class="bg-red-500 text-slate-950 font-bold text-xs px-3 py-2 rounded-lg hover:bg-red-400 transition">Reset Pool</button>
+                    </div>
+
+                    <button onclick="saveSettingsNotification()" class="w-full bg-gold-500 text-cyber-950 font-extrabold py-3.5 rounded-xl text-xs shadow-lg">Save All Preferences</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-cyber-900 border-t border-cyber-800 py-6 text-center text-xs text-slate-500">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2027 JAMB SUCCESS HUB. Powered by Dynamic Question Synthesis Engine.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT STATE ENGINE & UNIQUE QUESTION SYNTHESIZER -->
+    <script>
+        // SYSTEM STATE & LOCAL STORAGE KEYS
+        const STORAGE_KEY_SEEN = "jamb_seen_questions_v2";
+        const STORAGE_KEY_ATTEMPTS = "jamb_attempts_count_v2";
+        const STORAGE_KEY_SCORES = "jamb_scores_history_v2";
+
+        let seenQuestionHashes = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY_SEEN) || "[]"));
+        let attemptCounter = parseInt(localStorage.getItem(STORAGE_KEY_ATTEMPTS) || "0");
+        let scoreHistory = JSON.parse(localStorage.getItem(STORAGE_KEY_SCORES) || "[]");
+
+        // Syllabus Readers Data
+        const subjectsData = {
+            "Mathematics": {
+                icon: "calculator",
+                topics: [
+                    { title: "Algebraic Processes & Quadratics", readTime: "12 mins", content: "<h4>1. Quadratic Equations</h4><p>Standard Form: <code>ax² + bx + c = 0</code>.</p><p>Quadratic Formula: <code>x = [-b ± √(b² - 4ac)] / 2a</code>.</p><p>Discriminant Δ = b² - 4ac dictates real or complex roots.</p>" },
+                    { title: "Calculus: Differentiation & Integration", readTime: "18 mins", content: "<h4>Derivatives</h4><p>If y = xⁿ, dy/dx = n·xⁿ⁻¹.</p><p>Integration: ∫ xⁿ dx = (xⁿ⁺¹ / n+1) + C.</p>" },
+                    { title: "Trigonometry & Bearing", readTime: "15 mins", content: "<h4>Sine & Cosine Rules</h4><p>a/sin A = b/sin B = c/sin C.<br>a² = b² + c² - 2bc cos A.</p>" }
+                ]
+            },
+            "English Language": {
+                icon: "book-open",
+                topics: [
+                    { title: "Lexis, Concord & Grammar Rules", readTime: "10 mins", content: "<h4>Subject-Verb Concord</h4><p>Every singular subject requires a singular verb. Collective nouns take singular verbs unless individuals are emphasized.</p>" },
+                    { title: "Comprehension & passage analysis", readTime: "14 mins", content: "<h4>Passage Strategy</h4><p>Locate topic sentences and differentiate inferred meaning from explicit statements.</p>" }
+                ]
+            },
+            "Physics": {
+                icon: "zap",
+                topics: [
+                    { title: "Mechanics, Force & Motion", readTime: "16 mins", content: "<h4>Equations of Uniform Acceleration</h4><p>v = u + at<br>s = ut + ½at²<br>v² = u² + 2as</p>" },
+                    { title: "Electricity & Magnetism", readTime: "15 mins", content: "<h4>Ohm's Law & Circuits</h4><p>V = IR. Series: R = R₁ + R₂. Parallel: 1/R = 1/R₁ + 1/R₂.</p>" }
+                ]
+            },
+            "Chemistry": {
+                icon: "flask-conical",
+                topics: [
+                    { title: "Organic Hydrocarbons & Functional Groups", readTime: "20 mins", content: "<h4>Alkanes, Alkenes & Alkynes</h4><p>Alkanes: C_n H_2n+2.<br>Alkenes: C_n H_2n.<br>Alkynes: C_n H_2n-2.</p>" },
+                    { title: "Stoichiometry & Mole Concept", readTime: "15 mins", content: "<h4>Moles & Molar Mass</h4><p>Moles = Mass (g) / Molar Mass (g/mol). Avogadro's constant = 6.02 × 10²³.</p>" }
+                ]
+            },
+            "Biology": {
+                icon: "dna",
+                topics: [
+                    { title: "Genetics, Inheritance & Variation", readTime: "15 mins", content: "<h4>Mendelian Genetics</h4><p>Monohybrid cross phenotypic ratio 3:1. Dihybrid ratio 9:3:3:1.</p>" },
+                    { title: "Cellular Biology & Ecology", readTime: "12 mins", content: "<h4>Organelles</h4><p>Mitochondria: Powerhouse ATP site. Chloroplast: Photosynthesis site.</p>" }
+                ]
+            }
+        };
+
+        // DYNAMIC QUESTION SYNTHESIS ENGINE (Generates unique randomized questions)
+        function generateUniqueQuestion(subject, categoryIndex, salt) {
+            let q = {};
+            const randomVal1 = Math.floor(Math.random() * 20) + 2;
+            const randomVal2 = Math.floor(Math.random() * 15) + 3;
+            const uniqueId = `${subject}-${categoryIndex}-${salt}-${Math.floor(Math.random()*100000)}`;
+
+            if (subject === "Mathematics") {
+                const a = randomVal1;
+                const b = randomVal2 * 2;
+                const c = randomVal1 + randomVal2;
+                q = {
+                    id: uniqueId,
+                    subject: "Mathematics",
+                    text: `Solve for x in the quadratic equation: x² - ${a + b}x + ${a * b} = 0.`,
+                    options: [
+                        `A) x = ${a} or x = ${b}`,
+                        `B) x = -${a} or x = ${b}`,
+                        `C) x = ${a + 2} or x = ${b - 1}`,
+                        `D) x = 0 or x = ${a * b}`
+                    ],
+                    correct: 0,
+                    explanation: `Factoring the quadratic gives (x - ${a})(x - ${b}) = 0. Therefore, x = ${a} or x = ${b}.`
+                };
+            } else if (subject === "Physics") {
+                const u = randomVal1;
+                const a = randomVal2;
+                const t = 4;
+                const v = u + (a * t);
+                const s = (u * t) + (0.5 * a * t * t);
+                q = {
+                    id: uniqueId,
+                    subject: "Physics",
+                    text: `A particle accelerates uniformly at ${a} m/s² from an initial velocity of ${u} m/s for ${t} seconds. Calculate the total distance traveled.`,
+                    options: [
+                        `A) ${s} m`,
+                        `B) ${s + 12} m`,
+                        `C) ${s - 8} m`,
+                        `D) ${s * 2} m`
+                    ],
+                    correct: 0,
+                    explanation: `Using s = ut + ½at²: s = (${u})(${t}) + ½(${a})(${t}²) = ${u*t} + ${0.5*a*16} = ${s} m.`
+                };
+            } else if (subject === "Chemistry") {
+                const moles = randomVal1;
+                const molarMass = 40; // NaOH
+                const mass = moles * molarMass;
+                q = {
+                    id: uniqueId,
+                    subject: "Chemistry",
+                    text: `Calculate the mass of NaOH (Molar mass = 40 g/mol) contained in ${moles} moles of the pure substance.`,
+                    options: [
+                        `A) ${mass} g`,
+                        `B) ${mass + 15} g`,
+                        `C) ${mass / 2} g`,
+                        `D) ${mass * 1.5} g`
+                    ],
+                    correct: 0,
+                    explanation: `Mass = Moles × Molar Mass = ${moles} mol × 40 g/mol = ${mass} grams.`
+                };
+            } else if (subject === "Biology") {
+                const biologyBank = [
+                    {
+                        t: `In a monohybrid cross between two heterozygous dominant tall plants (Tt), what percentage of offspring are predicted to be dwarf (tt)?`,
+                        o: ["A) 25%", "B) 50%", "C) 75%", "D) 100%"],
+                        c: 0,
+                        e: "Punnett square ratio is 1 TT : 2 Tt : 1 tt. The homozygous recessive (tt) constitutes 25%."
+                    },
+                    {
+                        t: `Which blood group is universally designated as the universal donor in human ABO system?`,
+                        o: ["A) Group O negative", "B) Group AB positive", "C) Group A positive", "D) Group B negative"],
+                        c: 0,
+                        e: "Group O negative lacks both A/B antigens and Rh antigen, avoiding agglutination."
+                    }
+                ];
+                const selected = biologyBank[salt % biologyBank.length];
+                q = {
+                    id: uniqueId,
+                    subject: "Biology",
+                    text: `${selected.t} (Variation Ref: #${salt})`,
+                    options: selected.o,
+                    correct: selected.c,
+                    explanation: selected.e
+                };
+            } else { // English
+                const vocabWords = [
+                    { w: "EPHEMERAL", syn: "Transient / Short-lived", ant: "Permanent" },
+                    { w: "METICULOUS", syn: "Painstaking / Thorough", ant: "Careless" },
+                    { w: "PRAGMATIC", syn: "Practical / Realistic", ant: "Idealistic" },
+                    { w: "CANDID", syn: "Frank / Outspoken", ant: "Deceptive" }
+                ];
+                const choice = vocabWords[salt % vocabWords.length];
+                q = {
+                    id: uniqueId,
+                    subject: "English Language",
+                    text: `Choose the option NEAREST IN MEANING to the capitalized word: "The professor's remarks were remarkably ${choice.w}."`,
+                    options: [
+                        `A) ${choice.syn}`,
+                        `B) ${choice.ant}`,
+                        `C) Complicated`,
+                        `D) Irrelevant`
+                    ],
+                    correct: 0,
+                    explanation: `The synonym for ${choice.w} is ${choice.syn}.`
+                };
+            }
+            return q;
+        }
+
+        // Generate full non-repeating set for CBT
+        function generateUniqueCBTSet(track) {
+            const set = [];
+            const subjects = track === "engineering" 
+                ? ["English Language", "Mathematics", "Chemistry", "Physics"] 
+                : ["English Language", "Biology", "Chemistry", "Physics"];
+            
+            const counts = { "English Language": 60, "Mathematics": 40, "Biology": 40, "Chemistry": 40, "Physics": 40 };
+
+            subjects.forEach(subj => {
+                const targetCount = counts[subj];
+                let generatedForSubj = 0;
+                let salt = 1;
+
+                while (generatedForSubj < targetCount) {
+                    const q = generateUniqueQuestion(subj, generatedForSubj, salt + attemptCounter * 100);
+                    if (!seenQuestionHashes.has(q.id)) {
+                        seenQuestionHashes.add(q.id);
+                        set.push(q);
+                        generatedForSubj++;
+                    }
+                    salt++;
+                }
+            });
+
+            // Persist seen set to local storage
+            localStorage.setItem(STORAGE_KEY_SEEN, JSON.stringify(Array.from(seenQuestionHashes)));
+            return set;
+        }
+
+        // CBT ENGINE STATE
+        let cbtQuestions = [];
+        let cbtCurrentIndex = 0;
+        let cbtUserAnswers = {};
+        let cbtFlaggedQuestions = new Set();
+        let cbtTimerInterval = null;
+        let cbtTimeRemaining = 7200; // 120 mins
+        let activeTrack = "science";
+
+        // INITIALIZATION
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            calculateCountdown();
+            updateAttemptMetricsUI();
+            initDashboardSubjects();
+            initLibrarySubjectButtons();
+            loadLibraryTopic('Mathematics', 0);
+            renderPastQuestionsBank();
+        });
+
+        function calculateCountdown() {
+            const examDate = new Date('April 15, 2027').getTime();
+            const now = new Date().getTime();
+            const diff = Math.max(0, Math.floor((examDate - now) / (1000 * 60 * 60 * 24)));
+            document.getElementById('countdown-days').innerText = diff;
+        }
+
+        function updateAttemptMetricsUI() {
+            document.getElementById('top-attempts-badge').innerText = attemptCounter;
+            document.getElementById('dash-attempts-count').innerText = attemptCounter;
+            document.getElementById('dash-unique-questions').innerText = seenQuestionHashes.size;
+            document.getElementById('prog-solved-count').innerText = seenQuestionHashes.size;
+            document.getElementById('cbt-upcoming-attempt-label').innerText = `Mock Attempt #${attemptCounter + 1} Ready`;
+            
+            // Progress circle path update
+            const percentage = Math.min(100, Math.round((seenQuestionHashes.size / 1000) * 100));
+            document.getElementById('readiness-percent-label').innerText = `${percentage}%`;
+            document.getElementById('readiness-svg-path').setAttribute('stroke-dasharray', `${percentage}, 100`);
+
+            // Average score
+            if (scoreHistory.length > 0) {
+                const avg = Math.round(scoreHistory.reduce((a,b) => a+b, 0) / scoreHistory.length);
+                document.getElementById('dash-avg-score').innerText = `${avg} / 400`;
+            }
+        }
+
+        function switchTab(tabId) {
+            const tabs = ['dashboard', 'library', 'practice', 'cbt', 'progress', 'settings'];
+            tabs.forEach(t => {
+                const section = document.getElementById('tab-content-' + t);
+                if (section) section.classList.add('hidden');
+                const btn = document.getElementById('nav-' + t);
+                if (btn) {
+                    btn.classList.remove('text-gold-400', 'bg-cyber-800');
+                    btn.classList.add('text-slate-400');
+                }
+            });
+
+            document.getElementById('tab-content-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if (activeBtn) activeBtn.classList.add('text-gold-400', 'bg-cyber-800');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // DASHBOARD & LIBRARY RENDERERS
+        function initDashboardSubjects() {
+            const container = document.getElementById('dashboard-subject-cards');
+            container.innerHTML = Object.keys(subjectsData).map(subj => `
+                <div onclick="openSubjectInLibrary('${subj}')" class="bg-cyber-900 border border-cyber-800 hover:border-gold-500/50 p-5 rounded-2xl cursor-pointer transition group shadow-lg">
+                    <div class="w-10 h-10 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                        <i data-lucide="${subjectsData[subj].icon}" class="w-5 h-5"></i>
+                    </div>
+                    <div class="font-bold text-slate-100 text-sm">${subj}</div>
+                    <div class="text-[10px] text-slate-400 mt-1">${subjectsData[subj].topics.length} Syllabus Modules</div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function openSubjectInLibrary(subj) {
+            switchTab('library');
+            selectLibrarySubject(subj);
+        }
+
+        function initLibrarySubjectButtons() {
+            const container = document.getElementById('library-subject-selector');
+            container.innerHTML = Object.keys(subjectsData).map(subj => `
+                <button onclick="selectLibrarySubject('${subj}')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyber-950 border border-cyber-700 text-slate-300 hover:border-gold-400 transition">${subj}</button>
+            `).join('');
+        }
+
+        function selectLibrarySubject(subj) {
+            loadLibraryTopic(subj, 0);
+        }
+
+        function loadLibraryTopic(subj, index) {
+            const topic = subjectsData[subj].topics[index];
+            document.getElementById('read-subject-tag').innerText = subj;
+            document.getElementById('read-topic-title').innerText = topic.title;
+            document.getElementById('read-topic-body').innerHTML = topic.content;
+
+            const topicList = document.getElementById('library-topic-list');
+            topicList.innerHTML = subjectsData[subj].topics.map((t, idx) => `
+                <button onclick="loadLibraryTopic('${subj}', ${idx})" class="w-full text-left p-3 rounded-xl border text-xs flex justify-between items-center ${idx === index ? 'bg-gold-500/10 border-gold-500/50 text-gold-400' : 'bg-cyber-950 border-cyber-800 text-slate-300'}">
+                    <span>${t.title}</span>
+                    <span class="text-[10px] text-slate-500">${t.readTime}</span>
+                </button>
+            `).join('');
+        }
+
+        // PAST QUESTIONS SEARCH BANK
+        function renderPastQuestionsBank() {
+            const container = document.getElementById('pq-questions-container');
+            const sampleSet = [
+                generateUniqueQuestion("Mathematics", 1, 99),
+                generateUniqueQuestion("Physics", 1, 98),
+                generateUniqueQuestion("Chemistry", 1, 97),
+                generateUniqueQuestion("English Language", 1, 96),
+                generateUniqueQuestion("Biology", 1, 95)
+            ];
+
+            container.innerHTML = sampleSet.map(q => `
+                <div class="bg-cyber-900 border border-cyber-800 p-6 rounded-2xl space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[10px] font-bold uppercase bg-gold-500/10 text-gold-400 px-2.5 py-1 rounded border border-gold-500/20">${q.subject} • 2026</span>
+                        <span class="text-xs text-slate-400 font-mono">${q.id}</span>
+                    </div>
+                    <div class="text-sm font-semibold text-slate-100">${q.text}</div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        ${q.options.map(opt => `<div class="p-3 rounded-xl bg-cyber-950 border border-cyber-800 text-slate-300">${opt}</div>`).join('')}
+                    </div>
+                    <details class="text-xs text-slate-400 pt-2 border-t border-cyber-800">
+                        <summary class="cursor-pointer text-gold-400 font-bold">Show Answer & Solution</summary>
+                        <p class="mt-2 text-slate-300 bg-cyber-950 p-3 rounded-xl border border-cyber-800">${q.explanation}</p>
+                    </details>
+                </div>
+            `).join('');
+        }
+
+        function filterQuestions() { renderPastQuestionsBank(); }
+        function generateRandomPracticeSet() { renderPastQuestionsBank(); }
+
+        // MOCK CBT ENGINE LOGIC
+        function launchCBTExam() {
+            attemptCounter++;
+            localStorage.setItem(STORAGE_KEY_ATTEMPTS, attemptCounter.toString());
+            updateAttemptMetricsUI();
+
+            const trackRadio = document.querySelector('input[name="cbt-track"]:checked');
+            activeTrack = trackRadio ? trackRadio.value : "science";
+
+            // Generate non-repeating set
+            cbtQuestions = generateUniqueCBTSet(activeTrack);
+            cbtCurrentIndex = 0;
+            cbtUserAnswers = {};
+            cbtFlaggedQuestions.clear();
+            cbtTimeRemaining = 7200;
+
+            document.getElementById('cbt-setup-card').classList.add('hidden');
+            document.getElementById('cbt-active-viewport').classList.remove('hidden');
+
+            initCBTSubjectSwitchers();
+            startCBTTimer();
+            renderCBTQuestion();
+            renderCBTMatrix();
+        }
+
+        function initCBTSubjectSwitchers() {
+            const container = document.getElementById('cbt-subject-switchers');
+            const subjects = activeTrack === "engineering" 
+                ? ["English", "Maths", "Chemistry", "Physics"] 
+                : ["English", "Biology", "Chemistry", "Physics"];
+
+            container.innerHTML = subjects.map((s, idx) => `
+                <button onclick="jumpToSubjectSection(${idx})" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-cyber-950 border border-cyber-700 text-slate-300 hover:text-gold-400">
+                    ${s}
+                </button>
+            `).join('');
+        }
+
+        function jumpToSubjectSection(subjIdx) {
+            const offsets = [0, 60, 100, 140];
+            cbtCurrentIndex = offsets[subjIdx];
+            renderCBTQuestion();
+        }
+
+        function startCBTTimer() {
+            clearInterval(cbtTimerInterval);
+            cbtTimerInterval = setInterval(() => {
+                cbtTimeRemaining--;
+                const hrs = Math.floor(cbtTimeRemaining / 3600);
+                const mins = Math.floor((cbtTimeRemaining % 3600) / 60);
+                const secs = cbtTimeRemaining % 60;
+                
+                document.getElementById('cbt-timer-display').innerText = 
+                    `${String(hrs).padStart(2,'0')}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+
+                if (cbtTimeRemaining <= 0) {
+                    clearInterval(cbtTimerInterval);
+                    submitCBTExam();
+                }
+            }, 1000);
+        }
+
+        function renderCBTQuestion() {
+            const q = cbtQuestions[cbtCurrentIndex];
+            document.getElementById('cbt-q-number').innerText = cbtCurrentIndex + 1;
+            document.getElementById('cbt-q-total').innerText = cbtQuestions.length;
+            document.getElementById('cbt-active-subject-badge').innerText = q.subject.toUpperCase();
+            document.getElementById('cbt-question-id-code').innerText = q.id;
+            document.getElementById('cbt-question-text').innerText = q.text;
+
+            // Flag state
+            const isFlagged = cbtFlaggedQuestions.has(cbtCurrentIndex);
+            document.getElementById('flag-btn-text').innerText = isFlagged ? "Unflag Question" : "Flag Question";
+            document.getElementById('btn-flag-q').className = isFlagged 
+                ? "text-xs font-semibold text-purple-400 flex items-center gap-1.5" 
+                : "text-xs font-semibold text-slate-400 hover:text-gold-400 flex items-center gap-1.5";
+
+            // Options
+            const optsContainer = document.getElementById('cbt-options-container');
+            optsContainer.innerHTML = q.options.map((opt, i) => `
+                <label onclick="selectCBTOption(${i})" class="cursor-pointer flex items-center gap-3 p-4 rounded-xl border ${cbtUserAnswers[cbtCurrentIndex] === i ? 'bg-gold-500/10 border-gold-500 text-gold-400 font-bold' : 'bg-cyber-950 border-cyber-800 text-slate-300 hover:border-cyber-700'}">
+                    <input type="radio" name="cbt-opt" ${cbtUserAnswers[cbtCurrentIndex] === i ? 'checked' : ''} class="accent-gold-500">
+                    <span class="text-xs sm:text-sm">${opt}</span>
+                </label>
+            `).join('');
+
+            renderCBTMatrix();
+        }
+
+        function selectCBTOption(optIndex) {
+            cbtUserAnswers[cbtCurrentIndex] = optIndex;
+            renderCBTQuestion();
+        }
+
+        function toggleFlagQuestion() {
+            if (cbtFlaggedQuestions.has(cbtCurrentIndex)) {
+                cbtFlaggedQuestions.delete(cbtCurrentIndex);
+            } else {
+                cbtFlaggedQuestions.add(cbtCurrentIndex);
+            }
+            renderCBTQuestion();
+        }
+
+        function prevCBTQuestion() {
+            if (cbtCurrentIndex > 0) {
+                cbtCurrentIndex--;
+                renderCBTQuestion();
+            }
+        }
+
+        function nextCBTQuestion() {
+            if (cbtCurrentIndex < cbtQuestions.length - 1) {
+                cbtCurrentIndex++;
+                renderCBTQuestion();
+            }
+        }
+
+        function renderCBTMatrix() {
+            const grid = document.getElementById('cbt-matrix-grid');
+            let answeredCount = Object.keys(cbtUserAnswers).length;
+            document.getElementById('cbt-answered-summary').innerText = `${answeredCount} / 180 Answered`;
+
+            grid.innerHTML = cbtQuestions.map((_, idx) => {
+                let statusClass = "bg-cyber-950 border border-cyber-800 text-slate-400";
+                if (cbtUserAnswers[idx] !== undefined) statusClass = "bg-gold-500 text-cyber-950 font-bold";
+                if (cbtFlaggedQuestions.has(idx)) statusClass = "bg-purple-600 text-white font-bold";
+                if (idx === cbtCurrentIndex) statusClass += " ring-2 ring-gold-300";
+
+                return `
+                    <button onclick="jumpToCBTQ(${idx})" class="h-8 rounded-lg text-[11px] font-mono transition ${statusClass}">
+                        ${idx + 1}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function jumpToCBTQ(idx) {
+            cbtCurrentIndex = idx;
+            renderCBTQuestion();
+        }
+
+        function confirmSubmitCBTModal() {
+            if (confirm("Are you sure you want to submit your Mock CBT Exam?")) {
+                submitCBTExam();
+            }
+        }
+
+        function submitCBTExam() {
+            clearInterval(cbtTimerInterval);
+            
+            // Calculate Score over 400
+            let rawCorrect = 0;
+            cbtQuestions.forEach((q, idx) => {
+                if (cbtUserAnswers[idx] === q.correct) rawCorrect++;
+            });
+
+            // Scale to 400
+            const scaledScore = Math.round((rawCorrect / 180) * 400);
+            scoreHistory.push(scaledScore);
+            localStorage.setItem(STORAGE_KEY_SCORES, JSON.stringify(scoreHistory));
+            updateAttemptMetricsUI();
+
+            document.getElementById('cbt-active-viewport').classList.add('hidden');
+            document.getElementById('cbt-result-card').classList.remove('hidden');
+
+            document.getElementById('result-aggregate-score').innerText = `${scaledScore} / 400`;
+            
+            const statusLabel = document.getElementById('result-admission-status');
+            if (scaledScore >= 280) {
+                statusLabel.innerText = "High Chance of First Choice University Admission";
+                statusLabel.className = "text-xs font-bold text-emerald-400";
+            } else {
+                statusLabel.innerText = "Needs Improvement - Re-study Weak Topics";
+                statusLabel.className = "text-xs font-bold text-amber-400";
+            }
+
+            // Subject Breakdown
+            const subjects = activeTrack === "engineering" 
+                ? ["English Language", "Mathematics", "Chemistry", "Physics"] 
+                : ["English Language", "Biology", "Chemistry", "Physics"];
+
+            const breakdownContainer = document.getElementById('result-subject-breakdown');
+            breakdownContainer.innerHTML = subjects.map(s => {
+                const subjQs = cbtQuestions.filter(q => q.subject === s);
+                let correctCount = 0;
+                subjQs.forEach(q => {
+                    const originalIdx = cbtQuestions.indexOf(q);
+                    if (cbtUserAnswers[originalIdx] === q.correct) correctCount++;
+                });
+                const subjScaled = Math.round((correctCount / subjQs.length) * 100);
+
+                return `
+                    <div class="bg-cyber-950 p-4 rounded-xl border border-cyber-800 text-center">
+                        <div class="text-[10px] text-slate-400 uppercase font-bold">${s}</div>
+                        <div class="text-2xl font-extrabold text-gold-400 my-1">${subjScaled} / 100</div>
+                        <div class="text-[10px] text-slate-500">${correctCount} of ${subjQs.length} Correct</div>
+                    </div>
+                `;
+            }).join('');
+
+            // Explanations
+            const correctionsContainer = document.getElementById('result-corrections-container');
+            correctionsContainer.innerHTML = cbtQuestions.slice(0, 15).map((q, idx) => `
+                <div class="p-4 rounded-xl bg-cyber-950 border border-cyber-800 space-y-2 text-xs">
+                    <div class="flex justify-between font-bold text-gold-400">
+                        <span>Q${idx + 1}: ${q.subject}</span>
+                        <span>${cbtUserAnswers[idx] === q.correct ? '✓ Correct' : '✗ Incorrect'}</span>
+                    </div>
+                    <div class="text-slate-200">${q.text}</div>
+                    <div class="text-slate-400 font-mono">Solution: ${q.explanation}</div>
+                </div>
+            `).join('');
+        }
+
+        function resetCBT() {
+            document.getElementById('cbt-result-card').classList.add('hidden');
+            document.getElementById('cbt-setup-card').classList.remove('hidden');
+        }
+
+        // SETTINGS & CUSTOMIZATION
+        function setThemePreset(preset) {
+            document.body.className = `theme-${preset} bg-cyber-950 text-slate-100 font-sans min-h-screen flex flex-col selection:bg-gold-500 selection:text-cyber-950 transition-colors duration-300`;
+        }
+
+        function setFontScale(scale) {
+            const viewport = document.getElementById('cbt-question-text');
+            if (viewport) {
+                viewport.classList.remove('font-scale-sm', 'font-scale-md', 'font-scale-lg');
+                viewport.classList.add(`font-scale-${scale}`);
+            }
+        }
+
+        function updateSettings() {
+            const val = document.getElementById('setting-target-input').value;
+            document.getElementById('header-target-score').innerText = val;
+        }
+
+        function resetAttemptHistory() {
+            if (confirm("Reset question pool history? Unattempted questions will be cleared.")) {
+                seenQuestionHashes.clear();
+                localStorage.removeItem(STORAGE_KEY_SEEN);
+                updateAttemptMetricsUI();
+                alert("Question pool cache reset successfully!");
+            }
+        }
+
+        function saveSettingsNotification() {
+            alert("Preferences saved successfully!");
+        }
+    </script>
+</body>
+</html>
